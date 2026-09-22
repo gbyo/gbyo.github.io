@@ -26,8 +26,7 @@
     }
 
     main {
-      width: min(720px, calc(100vw - 48px));
-      text-align: center;
+      width: min(760px, calc(100vw - 48px));
     }
 
     nav {
@@ -39,49 +38,52 @@
     .project {
       position: relative;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       min-height: 38px;
       color: inherit;
       text-decoration: none;
     }
 
-    .project-inner {
-      display: flex;
-      align-items: baseline;
-      gap: 14px;
-      white-space: nowrap;
-      transition:
-        transform 220ms cubic-bezier(.2, .8, .2, 1);
-    }
-
     .name {
       font-size: 18px;
       line-height: 1.4;
+
+      transform: translateX(0);
+      transition:
+        transform 420ms cubic-bezier(.22, 1, .36, 1);
+      will-change: transform;
     }
 
     .description {
-      max-width: 0;
-      overflow: hidden;
-      opacity: 0;
+      position: absolute;
+      left: calc(50% + 20px);
+
       color: #999;
       font-size: 14px;
       line-height: 1.4;
-      text-align: left;
+      white-space: nowrap;
+
+      opacity: 0;
+      transform: translateX(-12px);
+
       transition:
-        max-width 260ms cubic-bezier(.2, .8, .2, 1),
-        opacity 160ms ease;
+        opacity 260ms ease,
+        transform 420ms cubic-bezier(.22, 1, .36, 1);
+
+      pointer-events: none;
+      will-change: transform, opacity;
     }
 
-    .project:hover .project-inner,
-    .project:focus-visible .project-inner {
-      transform: translateX(-12px);
+    .project:hover .name,
+    .project:focus-visible .name {
+      transform: translateX(-90px);
     }
 
     .project:hover .description,
     .project:focus-visible .description {
-      max-width: 440px;
       opacity: 1;
+      transform: translateX(0);
     }
 
     .project:focus-visible {
@@ -93,62 +95,43 @@
       text-underline-offset: 4px;
     }
 
-    .site {
-      margin-top: 30px;
-    }
-
-    .site a {
-      color: #777;
-      font-size: 14px;
-      text-decoration: none;
-      transition: color 150ms ease;
-    }
-
-    .site a:hover {
-      color: #111;
-    }
-
     @media (max-width: 620px), (hover: none) {
       main {
         width: min(420px, calc(100vw - 40px));
-        text-align: left;
       }
 
       nav {
-        gap: 16px;
+        gap: 18px;
       }
 
       .project {
-        justify-content: flex-start;
+        display: block;
         min-height: auto;
       }
 
-      .project-inner {
+      .name {
         display: block;
-        white-space: normal;
-      }
-
-      .project:hover .project-inner,
-      .project:focus-visible .project-inner {
-        transform: none;
       }
 
       .description {
+        position: static;
         display: block;
-        max-width: none;
         margin-top: 2px;
+
+        white-space: normal;
         opacity: 1;
+        transform: none;
       }
 
-      .site {
-        margin-top: 32px;
+      .project:hover .name,
+      .project:focus-visible .name {
+        transform: none;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .project-inner,
-      .description,
-      .site a {
+      .name,
+      .description {
         transition: none;
       }
     }
@@ -159,51 +142,35 @@
   <main>
     <nav aria-label="Projects">
       <a class="project" href="https://github.com/gbyo/openhall">
-        <span class="project-inner">
-          <span class="name">openhall</span>
-          <span class="description">self-hosted school presence and movement</span>
-        </span>
+        <span class="name">openhall</span>
+        <span class="description">self-hosted school presence and movement</span>
       </a>
 
       <a class="project" href="https://github.com/gbyo/qbsheet">
-        <span class="project-inner">
-          <span class="name">qbsheet</span>
-          <span class="description">offline-first quiz bowl scoring and tournament tools</span>
-        </span>
+        <span class="name">qbsheet</span>
+        <span class="description">offline-first quiz bowl scoring and tournament tools</span>
       </a>
 
       <a class="project" href="https://github.com/gbyo/tilecast">
-        <span class="project-inner">
-          <span class="name">tilecast</span>
-          <span class="description">actually open source digital signage</span>
-        </span>
+        <span class="name">tilecast</span>
+        <span class="description">actually open source digital signage</span>
       </a>
 
       <a class="project" href="https://github.com/gbyo/programme">
-        <span class="project-inner">
-          <span class="name">programme</span>
-          <span class="description">a native soccer scorebook for iPad</span>
-        </span>
+        <span class="name">programme</span>
+        <span class="description">a native soccer scorebook for iPad</span>
       </a>
 
       <a class="project" href="https://github.com/gbyo/picta">
-        <span class="project-inner">
-          <span class="name">picta</span>
-          <span class="description">offline-first show control for a second display</span>
-        </span>
+        <span class="name">picta</span>
+        <span class="description">offline-first show control for a second display</span>
       </a>
 
       <a class="project" href="https://github.com/gbyo/homebridge-lanternic">
-        <span class="project-inner">
-          <span class="name">homebridge-lanternic</span>
-          <span class="description">HomeKit control for Magic Lantern BLE lights</span>
-        </span>
+        <span class="name">homebridge-lanternic</span>
+        <span class="description">HomeKit control for Magic Lantern BLE lights</span>
       </a>
     </nav>
-
-    <div class="site">
-      <a href="https://gibsonbell.com">gibsonbell.com</a>
-    </div>
   </main>
 </body>
 </html>
