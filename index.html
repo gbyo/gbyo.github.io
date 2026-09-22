@@ -1,56 +1,204 @@
-```html
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Projects by Gibson Bell">
   <title>gbyo</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
       display: grid;
       place-items: center;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: white;
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      background: #fff;
       color: #111;
     }
 
     main {
+      width: min(720px, calc(100vw - 48px));
       text-align: center;
     }
 
     nav {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 4px;
     }
 
-    a {
+    .project {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 38px;
       color: inherit;
       text-decoration: none;
-      font-size: 18px;
     }
 
-    a:hover {
+    .project-inner {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      white-space: nowrap;
+      transition:
+        transform 220ms cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .name {
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .description {
+      max-width: 0;
+      overflow: hidden;
+      opacity: 0;
+      color: #999;
+      font-size: 14px;
+      line-height: 1.4;
+      text-align: left;
+      transition:
+        max-width 260ms cubic-bezier(.2, .8, .2, 1),
+        opacity 160ms ease;
+    }
+
+    .project:hover .project-inner,
+    .project:focus-visible .project-inner {
+      transform: translateX(-12px);
+    }
+
+    .project:hover .description,
+    .project:focus-visible .description {
+      max-width: 440px;
+      opacity: 1;
+    }
+
+    .project:focus-visible {
+      outline: none;
+    }
+
+    .project:focus-visible .name {
       text-decoration: underline;
+      text-underline-offset: 4px;
     }
 
     .site {
-      margin-top: 28px;
-      color: #666;
+      margin-top: 30px;
+    }
+
+    .site a {
+      color: #777;
+      font-size: 14px;
+      text-decoration: none;
+      transition: color 150ms ease;
+    }
+
+    .site a:hover {
+      color: #111;
+    }
+
+    @media (max-width: 620px), (hover: none) {
+      main {
+        width: min(420px, calc(100vw - 40px));
+        text-align: left;
+      }
+
+      nav {
+        gap: 16px;
+      }
+
+      .project {
+        justify-content: flex-start;
+        min-height: auto;
+      }
+
+      .project-inner {
+        display: block;
+        white-space: normal;
+      }
+
+      .project:hover .project-inner,
+      .project:focus-visible .project-inner {
+        transform: none;
+      }
+
+      .description {
+        display: block;
+        max-width: none;
+        margin-top: 2px;
+        opacity: 1;
+      }
+
+      .site {
+        margin-top: 32px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .project-inner,
+      .description,
+      .site a {
+        transition: none;
+      }
     }
   </style>
 </head>
+
 <body>
   <main>
-    <nav>
-      <a href="https://github.com/gbyo/tilecast">tilecast</a>
-      <a href="https://github.com/gbyo/lanternic">lanternic</a>
-      <a href="https://github.com/gbyo/fruity">fruity</a>
-      <a href="https://github.com/gbyo/qbsheet">qbsheet</a>
-      <a href="https://github.com/gbyo/kadro">kadro</a>
+    <nav aria-label="Projects">
+      <a class="project" href="https://github.com/gbyo/openhall">
+        <span class="project-inner">
+          <span class="name">openhall</span>
+          <span class="description">self-hosted school presence and movement</span>
+        </span>
+      </a>
+
+      <a class="project" href="https://github.com/gbyo/qbsheet">
+        <span class="project-inner">
+          <span class="name">qbsheet</span>
+          <span class="description">offline-first quiz bowl scoring and tournament tools</span>
+        </span>
+      </a>
+
+      <a class="project" href="https://github.com/gbyo/tilecast">
+        <span class="project-inner">
+          <span class="name">tilecast</span>
+          <span class="description">actually open source digital signage</span>
+        </span>
+      </a>
+
+      <a class="project" href="https://github.com/gbyo/programme">
+        <span class="project-inner">
+          <span class="name">programme</span>
+          <span class="description">a native soccer scorebook for iPad</span>
+        </span>
+      </a>
+
+      <a class="project" href="https://github.com/gbyo/picta">
+        <span class="project-inner">
+          <span class="name">picta</span>
+          <span class="description">offline-first show control for a second display</span>
+        </span>
+      </a>
+
+      <a class="project" href="https://github.com/gbyo/homebridge-lanternic">
+        <span class="project-inner">
+          <span class="name">homebridge-lanternic</span>
+          <span class="description">HomeKit control for Magic Lantern BLE lights</span>
+        </span>
+      </a>
     </nav>
 
     <div class="site">
@@ -59,4 +207,3 @@
   </main>
 </body>
 </html>
-```
